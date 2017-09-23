@@ -1,0 +1,50 @@
+service: serverless-todo
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: us-west-2
+
+functions:
+
+  postTodo:
+    handler: todos/todos_handler.postTodo
+    events:
+      - http:
+          path: '/todo'
+          method: post
+
+  getTodos:
+    handler: todos/todos_handler.getTodos
+    events:
+      - http:
+          path: '/todos'
+          method: get
+
+  getTodoById:
+    handler: todos/todos_handler.getTodoById
+    events:
+      - http:
+          path: '/todo/{id}'
+          method: get
+
+  updateTodo:
+    handler: todos/todos_handler.updateTodo
+    events:
+      - http:
+          path: '/update/{id}'
+          method: patch
+
+  deleteTodo:
+    handler: todos/todos_handler.deleteTodo
+    events:
+      - http:
+          path: '/delete/{id}'
+          method: delete
+
+  signUp:
+    handler: auth/auth_handler.signUp
+    events:
+      - http:
+          path: '/signUp'
+          method: post
